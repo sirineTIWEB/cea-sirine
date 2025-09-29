@@ -1,3 +1,5 @@
+<?php
+
 // relier style
 
 function ajouter_style() {
@@ -5,3 +7,5 @@ function ajouter_style() {
 
 }
 add_action( 'wp_enqueue_scripts', 'ajouter_style', PHP_INT_MAX );
+
+?>
