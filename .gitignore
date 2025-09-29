@@ -1,3 +1,17 @@
-node_modules
+# FICHIERS SENSIBLES - NE JAMAIS COMMITER !
+.env                 # Contient les mots de passe FTP
+.env.local          # Toute variante de .env
+.env.production     # Toute variante de .env
+deploy.js           # Contient le script de déploiement
+.vscode/            # Configuration VS Code
 
-.env
+# Node modules - Très lourd, jamais sur Git
+node_modules/
+package-lock.json
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.log
+*.sql
+*.zip
