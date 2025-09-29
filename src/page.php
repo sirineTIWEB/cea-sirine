@@ -1,5 +1,8 @@
 <?php get_header(); ?>
 
-<h1 class="bg-red-400">hola</h1>
+<div>
+    <?php the_content(); ?>
+</div>
+
 
 <?php get_footer(); ?>
