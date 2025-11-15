@@ -4,6 +4,7 @@
 .env.production
 deploy.js
 .vscode/
+deploy-local.js
 
 # Node modules - Très lourd, jamais sur Git
 node_modules/

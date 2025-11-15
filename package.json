@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tw": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/style.css --watch",
     "build": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/style.css --minify",
-    "deploy": "npm run build && node deploy.js"
+    "deploy": "npm run build && node deploy.js",
+    "local": "npm run build && node deploy-local.js"
   },
   "repository": {
     "type": "git",
