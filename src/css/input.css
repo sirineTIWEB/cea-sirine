@@ -6,10 +6,12 @@
   --color-cea-primary: #1e40af;
   --color-cea-secondary: #E05A00;
   --color-cea-dark: #1f2937;
+  --font-cea-span: "spalla", sans-serif;
+  --font-cea-base: "aktiv-grotesk", sans-serif;
 }
 
 body {
-  font-family: "aktiv-grotesk", sans-serif;
+  font-family: var(--font-cea-base);
   font-weight: 400;
   font-style: normal;
 }
@@ -100,20 +102,29 @@ body {
 }
 
 /* Page content styling */
+
+.page-content h1 {
+  @apply text-8xl capitalize text-black font-medium;
+}
+
+h1 span {
+  @apply font-cea-span font-bold;
+}
+
 .page-content h2 {
   @apply text-3xl font-bold text-gray-900 mt-12 mb-6;
 }
 
-.page-content h3 {
+/* .page-content h3 {
   @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
 }
 
 .page-content h4 {
   @apply text-xl font-bold text-gray-900 mt-6 mb-3;
-}
+} */
 
 .page-content p {
-  @apply mb-4 leading-relaxed text-gray-700;
+  @apply text-2xl font-light mb-4 leading-relaxed text-gray-700;
 }
 
 .page-content ol {
@@ -226,16 +237,4 @@ body {
 
 .membre-modal .modal-dialog::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-/* sirine css */
-
-h1 {
-  @apply text-8xl capitalize text-black font-medium;
-}
-
-span {
-  font-family: "spalla", sans-serif;
-  font-weight: 700;
-  font-style: normal;
 }

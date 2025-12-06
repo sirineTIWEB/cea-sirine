@@ -8,7 +8,8 @@
     "tw": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/style.css --watch",
     "build": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/style.css --minify",
     "deploy": "npm run build && node deploy.js",
-    "local": "npm run build && node deploy-local.js"
+    "local": "npm run build && node deploy-local.js",
+    "local:watch": "npx nodemon"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "autoprefixer": "^10.4.21",
     "basic-ftp": "^5.0.5",
     "dotenv": "^17.2.2",
+    "nodemon": "^3.1.11",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.13",
     "vite": "^7.1.7"
