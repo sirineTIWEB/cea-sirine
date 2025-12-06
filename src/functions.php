@@ -8,6 +8,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Remove automatic paragraph wrapping from content
+remove_filter('the_content', 'wpautop');
+remove_filter('the_excerpt', 'wpautop');
+
 // Theme setup
 function theme_cea_sirine_setup() {
     // Add theme support for title tag

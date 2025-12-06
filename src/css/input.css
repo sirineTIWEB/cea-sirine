@@ -1,13 +1,14 @@
 @import "tailwindcss";
 @import url("https://use.typekit.net/iis6mvj.css");
-
 /* Variables CSS personnalisées CEA */
+
 @theme {
   --color-cea-primary: #1e40af;
-  --color-cea-secondary: #E05A00;
-  --color-cea-dark: #1f2937;
+  --color-cea-orange: #E05A00;
+  --color-cea-grey: #6F6F6F;
   --font-cea-span: "spalla", sans-serif;
   --font-cea-base: "aktiv-grotesk", sans-serif;
+  --font-cea-icon: "inter-variable", sans-serif;
 }
 
 body {
@@ -19,13 +20,22 @@ body {
 /* Composants personnalisés */
 @layer components {
   .btn-primary {
-    @apply px-2.5 pb-2 border-b-cea-secondary border-b-2 text-cea-secondary font-semibold;
-    @apply hover:bg-blue-800 transition-all duration-200;
+    @apply text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-semibold inline-block;
+  }
+
+  .btn-primary::after {
+    content: ' →';
+    display: inline;
+    white-space: nowrap;
   }
   
   .btn-secondary {
     @apply px-6 py-3 bg-amber-500 text-white font-semibold rounded-lg;
     @apply hover:bg-amber-600 transition-all duration-200;
+  }
+
+  .btn-icon {
+    @apply text-cea-grey text-3xl font-cea-icon;
   }
   
   .card {
@@ -103,7 +113,7 @@ body {
 
 /* Page content styling */
 
-.page-content h1 {
+h1 {
   @apply text-8xl capitalize text-black font-medium;
 }
 
@@ -111,20 +121,24 @@ h1 span {
   @apply font-cea-span font-bold;
 }
 
-.page-content h2 {
-  @apply text-3xl font-bold text-gray-900 mt-12 mb-6;
+span {
+  @apply font-cea-span font-bold;
 }
 
-/* .page-content h3 {
-  @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
+h2 {
+  @apply text-3xl font-bold text-black;
 }
 
 .page-content h4 {
   @apply text-xl font-bold text-gray-900 mt-6 mb-3;
 } */
 
-.page-content p {
-  @apply text-2xl font-light mb-4 leading-relaxed text-gray-700;
+h3 {
+  @apply text-xl font-light;
+}
+
+p {
+  @apply font-cea-span text-base;
 }
 
 .page-content ol {
@@ -139,9 +153,9 @@ h1 span {
   @apply pl-2 text-gray-700;
 }
 
-.page-content a {
+/* .page-content a {
   @apply text-blue-600 underline hover:text-blue-800 transition-colors;
-}
+} */
 
 .page-content strong {
   @apply font-bold text-gray-900;

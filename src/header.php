@@ -85,8 +85,8 @@
                 // Check if this is the current menu item
                 $is_current = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) || in_array('current-menu-ancestor', $classes) || in_array('current-page-ancestor', $classes);
                 $link_class = $is_current
-                  ? 'font-light text-black text-xl border-b-cea-secondary border-b-2 pb-2 px-2.5'
-                  : 'font-light text-black text-xl hover:border-b-cea-secondary hover:border-b-2 pb-2 px-2.5';
+                  ? 'font-light text-black text-xl border-b-cea-orange border-b-2 pb-2 px-2.5'
+                  : 'font-light text-black text-xl hover:border-b-cea-orange hover:border-b-2 pb-2 px-2.5';
 
                 $item_output = isset($args->before) ? $args->before : '';
                 $item_output .= '<a' . $attributes . ' class="' . $link_class . '">';

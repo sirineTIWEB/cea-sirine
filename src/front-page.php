@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main gap-32">
     <?php while (have_posts()): ?>
         <?php the_post(); ?>
 
@@ -14,9 +14,10 @@ get_header(); ?>
             <div class="px-24 flex justify-between items-end">
                 <div>
                     <h1>Bienvenue au <span>CEA</span>.</h1>
-                    <p>Le site du Conseil des Étudiants Administateurs de la Haute École Fransisco-Ferrer</p>
+                    <h3 class="w-1/2">Le <span>CEA</span> Ferrer est l’organisme officiel composé des étudiants élus par la
+                        HEFF pour représenter et défendre les intérêts de tous au sein de la Haute École.</h3>
                 </div>
-                <a href="" class="btn-primary">Découvrir →</a>
+                <a href="" class="btn-primary">Découvrir</a>
             </div>
             <?php if (has_post_thumbnail()): ?>
                 <div class="w-screen h-[40vh] bg-cover overflow-hidden">
@@ -37,104 +38,92 @@ get_header(); ?>
     <?php endwhile; ?>
 
     <!-- Upcoming Activities Section -->
-    <section class="activities-section">
-        <div class="container-cea">
-            <h2>Prochaines activit�s</h2>
+    <section class="activities-section px-24 gap-24">
+        <div class="px-24 flex justify-between items-end">
+            <div>
+                <h1>Activités à venir</h1>
+                <h3 class="w-1/2">Le <span>CEA</span> Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                    vulputate libero et velit interdum, ac aliquet odio mattis.</h3>
+            </div>
+            <a href="<?php echo home_url('/activites/'); ?>" class="btn-primary">Toutes les activités</a>
+        </div>
 
-            <?php
-            // Query for upcoming events using Events Manager
-            $today = date('Y-m-d');
-            $args = array(
-                'post_type' => 'event',
-                'posts_per_page' => 3,
-                'meta_key' => '_event_start_date',
-                'orderby' => 'meta_value',
-                'order' => 'ASC',
-                'meta_query' => array(
-                    array(
-                        'key' => '_event_start_date',
-                        'value' => $today,
-                        'compare' => '>=',
-                        'type' => 'DATE'
-                    )
+        <?php
+        // Query for upcoming events using Events Manager
+        $today = date('Y-m-d');
+        $args = array(
+            'post_type' => 'event',
+            'posts_per_page' => 3,
+            'meta_key' => '_event_start_date',
+            'orderby' => 'meta_value',
+            'order' => 'ASC',
+            'meta_query' => array(
+                array(
+                    'key' => '_event_start_date',
+                    'value' => $today,
+                    'compare' => '>=',
+                    'type' => 'DATE'
                 )
-            );
+            )
+        );
 
-            $activities = new WP_Query($args);
+        $activities = new WP_Query($args);
 
-            if ($activities->have_posts()): ?>
-                <div>
-                    <?php while ($activities->have_posts()):
-                        $activities->the_post();
-                        $event_id = get_the_ID();
-                        $event_start_date = get_post_meta($event_id, '_event_start_date', true);
-                        $event_start_time = get_post_meta($event_id, '_event_start_time', true);
-                        $event_location = get_post_meta($event_id, '_location_name', true);
-                        ?>
-                        <article class="activity-card">
-                            <?php if (has_post_thumbnail()): ?>
-                                <div class="activity-thumbnail">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php the_post_thumbnail('medium'); ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
+        if ($activities->have_posts()): ?>
+            <div class="flex flex-col gap-24">
+                <?php while ($activities->have_posts()):
+                    $activities->the_post();
+                    $event_id = get_the_ID();
+                    $event_start_date = get_post_meta($event_id, '_event_start_date', true);
+                    $event_start_time = get_post_meta($event_id, '_event_start_time', true);
+                    $event_location = get_post_meta($event_id, '_location_name', true);
+                    ?>
+                    <article class="border-t border-t-black">
+                        <div class="flex justify-between pt-5">
+                            <div class="flex gap-[30vw]">
+                                <div class="flex flex-col">
+                                    <?php if ($event_location): ?>
+                                        <p><?php echo esc_html($event_location); ?></p>
+                                    <?php endif; ?>
+                                    <?php if ($event_start_date): ?>
+                                        <p>
+                                            <?php echo date_i18n('d/m/Y', strtotime($event_start_date)); ?>
+                                            <?php if ($event_start_time): ?>
+                                                - <?php echo date('H:i', strtotime($event_start_time)); ?>
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
 
-                            <div class="activity-content">
-                                <h3>
+                                <?php endif; ?>
+                                <h1 class="w-1/2">
                                     <a href="<?php the_permalink(); ?>">
                                         <?php the_title(); ?>
                                     </a>
-                                </h3>
-
-                                <?php if ($event_start_date): ?>
-                                    <div class="activity-date">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                            </path>
-                                        </svg>
-                                        <span>
-                                            <?php echo date_i18n('d/m/Y', strtotime($event_start_date)); ?>
-                                            <?php if ($event_start_time): ?>
-                                                � <?php echo date('H:i', strtotime($event_start_time)); ?>
-                                            <?php endif; ?>
-                                        </span>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ($event_location): ?>
-                                    <div class="activity-location">
-                                        <svg viewBox="0 0 24 24">
-                                            <path
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-                                            </path>
-                                            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
-                                        <span><?php echo esc_html($event_location); ?></span>
-                                    </div>
-                                <?php endif; ?>
-
-                                <a href="<?php the_permalink(); ?>">
-                                    Voir le d�tail
-                                </a>
+                                </h1>
                             </div>
-                        </article>
-                    <?php endwhile; ?>
-                </div>
 
-                <div>
-                    <a href="<?php echo home_url('/activites/'); ?>">
-                        Toutes les activit�s
-                    </a>
-                </div>
 
-            <?php else: ?>
-                <p>Aucune activit� � venir pour le moment.</p>
-            <?php endif; ?>
+                            <a class="btn-icon" href="<?php the_permalink(); ?>">
+                                →
+                            </a>
+                        </div>
+                    </article>
 
-            <?php wp_reset_postdata(); ?>
-        </div>
+                <?php endwhile; ?>
+            </div>
+
+            <div>
+                <a href="<?php echo home_url('/activites/'); ?>">
+                    Toutes les activit�s
+                </a>
+            </div>
+
+        <?php else: ?>
+            <p>Aucune activit� � venir pour le moment.</p>
+        <?php endif; ?>
+
+        <?php wp_reset_postdata(); ?>
+
     </section>
 
     <!-- Latest News Section -->
