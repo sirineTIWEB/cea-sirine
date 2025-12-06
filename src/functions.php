@@ -16,6 +16,15 @@ function theme_cea_sirine_setup() {
     // Add theme support for custom logo
     add_theme_support('custom-logo');
 
+    // Add theme support for post thumbnails (featured images)
+    add_theme_support('post-thumbnails');
+
+    // Set custom image sizes
+    add_image_size('thumbnail', 150, 150, true);      // Hard crop
+    add_image_size('medium', 300, 300, false);        // Soft proportional crop
+    add_image_size('medium_large', 768, 0, false);    // No height limit
+    add_image_size('large', 1024, 1024, false);       // Soft proportional crop
+
     // Add theme support for HTML5
     add_theme_support('html5', array(
         'search-form',

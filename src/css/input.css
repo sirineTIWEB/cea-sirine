@@ -1,16 +1,23 @@
 @import "tailwindcss";
+@import url("https://use.typekit.net/iis6mvj.css");
 
 /* Variables CSS personnalisées CEA */
-:root {
+@theme {
   --color-cea-primary: #1e40af;
-  --color-cea-secondary: #f59e0b;
+  --color-cea-secondary: #E05A00;
   --color-cea-dark: #1f2937;
+}
+
+body {
+  font-family: "aktiv-grotesk", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Composants personnalisés */
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg;
+    @apply px-2.5 pb-2 border-b-cea-secondary border-b-2 text-cea-secondary font-semibold;
     @apply hover:bg-blue-800 transition-all duration-200;
   }
   
@@ -219,4 +226,16 @@
 
 .membre-modal .modal-dialog::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* sirine css */
+
+h1 {
+  @apply text-8xl capitalize text-black font-medium;
+}
+
+span {
+  font-family: "spalla", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }

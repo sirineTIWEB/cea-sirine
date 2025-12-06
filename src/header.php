@@ -20,7 +20,7 @@
     <a class="skip-link screen-reader-text"
       href="#primary"><?php esc_html_e('Skip to content', 'theme-cea-prof'); ?></a>
 
-    <header id="masthead" class="site-header bg-white shadow-lg sticky top-0 z-50">
+    <header id="masthead" class="site-header bg-white sticky top-0 z-50">
       <div class="container-cea">
         <div class="flex items-center justify-between h-16 md:h-20">
           <!-- Site Branding -->
@@ -85,8 +85,8 @@
                 // Check if this is the current menu item
                 $is_current = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) || in_array('current-menu-ancestor', $classes) || in_array('current-page-ancestor', $classes);
                 $link_class = $is_current
-                  ? 'text-blue-700 font-bold border-b-2 border-blue-700 pb-1 no-underline'
-                  : 'text-gray-700 hover:text-blue-700 font-medium transition-colors duration-200 no-underline';
+                  ? 'font-light text-black text-xl border-b-cea-secondary border-b-2 pb-2 px-2.5'
+                  : 'font-light text-black text-xl hover:border-b-cea-secondary hover:border-b-2 pb-2 px-2.5';
 
                 $item_output = isset($args->before) ? $args->before : '';
                 $item_output .= '<a' . $attributes . ' class="' . $link_class . '">';
