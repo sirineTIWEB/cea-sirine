@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // News Carousel Functionality
     initNewsCarousel();
+
+    // Projects Carousel Functionality
+    initProjectsCarousel();
 });
 
 function initMembresModal() {
@@ -241,4 +244,162 @@ function initNewsCarousel() {
     // Attach event listeners
     btnNext.addEventListener('click', nextArticle);
     btnPrev.addEventListener('click', prevArticle);
+}
+
+// Projects Carousel
+function initProjectsCarousel() {
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) return;
+
+    const projects = JSON.parse(projectsGrid.dataset.projects);
+    if (projects.length <= 2) return; // No need for carousel if 2 or fewer projects
+
+    const btnNavigate = document.getElementById('btn-projects-navigate');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    let currentPairIndex = 0; // 0 means showing projects 0 and 1
+    let direction = 'right';
+
+    function updateProjects(index1, index2) {
+        const card1 = projectCards[0];
+        const card2 = projectCards[1];
+
+        // Update first card
+        updateProjectCard(card1, projects[index1], direction);
+
+        // Update second card
+        updateProjectCard(card2, projects[index2], direction);
+    }
+
+    function updateProjectCard(card, project, animDirection) {
+        // Update date
+        const dateElement = card.querySelector('h1 span');
+        dateElement.textContent = project.date;
+
+        // Update thumbnail with animation (same pattern as news carousel)
+        let thumbnailDiv = card.querySelector('.project-thumbnail');
+
+        // Ensure thumbnail div always exists to maintain layout
+        if (!thumbnailDiv) {
+            thumbnailDiv = document.createElement('div');
+            thumbnailDiv.className = 'project-thumbnail';
+            card.insertBefore(thumbnailDiv, card.querySelector('.project-content'));
+        }
+
+        const thumbnail = thumbnailDiv.querySelector('a');
+
+        if (project.thumbnail) {
+            if (thumbnail) {
+                thumbnail.href = project.permalink;
+                const oldImg = thumbnail.querySelector('img');
+
+                if (oldImg) {
+                    // Determine animation classes based on direction
+                    const slideInClass = animDirection === 'right' ? 'slide-in-right' : 'slide-in-left';
+                    const slideOutClass = animDirection === 'right' ? 'slide-out-left' : 'slide-out-right';
+
+                    // Create new image element
+                    const newImg = document.createElement('img');
+                    newImg.src = project.thumbnail;
+                    newImg.alt = project.title;
+                    newImg.className = slideInClass;
+
+                    // Add old image slide-out animation
+                    oldImg.classList.add(slideOutClass);
+
+                    // Add new image to container
+                    thumbnail.appendChild(newImg);
+
+                    // After animation completes, remove old image
+                    setTimeout(() => {
+                        oldImg.remove();
+                        newImg.classList.remove(slideInClass);
+                    }, 600);
+                } else {
+                    // No existing image, just add it
+                    const newImg = document.createElement('img');
+                    newImg.src = project.thumbnail;
+                    newImg.alt = project.title;
+                    thumbnail.appendChild(newImg);
+                }
+            } else {
+                // No existing link, create the structure
+                thumbnailDiv.innerHTML = `
+                    <a href="${project.permalink}">
+                        <img src="${project.thumbnail}" alt="${project.title}">
+                    </a>
+                `;
+            }
+        } else {
+            // Keep the div but empty it to maintain spacing
+            thumbnailDiv.innerHTML = '';
+        }
+
+        // Update title
+        const titleLink = card.querySelector('h2 a');
+        titleLink.href = project.permalink;
+        titleLink.textContent = project.title;
+
+        // Update excerpt
+        const excerptElement = card.querySelector('.project-excerpt');
+        if (project.excerpt) {
+            if (excerptElement) {
+                excerptElement.textContent = project.excerpt;
+            } else {
+                // Create excerpt element
+                const newExcerpt = document.createElement('h3');
+                newExcerpt.className = 'project-excerpt';
+                newExcerpt.textContent = project.excerpt;
+                card.querySelector('.project-content').insertBefore(
+                    newExcerpt,
+                    card.querySelector('.btn-secondary')
+                );
+            }
+        } else {
+            // Remove excerpt if none
+            if (excerptElement) {
+                excerptElement.remove();
+            }
+        }
+
+        // Update button link
+        const btnLink = card.querySelector('.btn-secondary');
+        btnLink.href = project.permalink;
+    }
+
+    function navigate() {
+        if (direction === 'right') {
+            // Move forward by 2 to show next pair without overlap
+            currentPairIndex += 2;
+
+            // Check if we've reached or passed the last pair
+            if (currentPairIndex + 1 >= projects.length) {
+                // Adjust to show the last valid pair
+                currentPairIndex = projects.length - 2;
+                direction = 'left';
+                btnNavigate.textContent = '←';
+                btnNavigate.dataset.direction = 'left';
+            }
+        } else {
+            // Move backward by 2
+            currentPairIndex -= 2;
+
+            // Check if we've reached the first pair
+            if (currentPairIndex <= 0) {
+                currentPairIndex = 0;
+                direction = 'right';
+                btnNavigate.textContent = '→';
+                btnNavigate.dataset.direction = 'right';
+            }
+        }
+
+        // Update the displayed projects
+        const index1 = currentPairIndex;
+        const index2 = currentPairIndex + 1;
+
+        updateProjects(index1, index2);
+    }
+
+    // Attach event listener
+    btnNavigate.addEventListener('click', navigate);
 }

@@ -350,6 +350,24 @@ p {
   }
 }
 
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 .news-content {
   @apply col-span-3 flex flex-col justify-between ml-5;
 }
@@ -390,4 +408,54 @@ p {
 
 .btn-prevcard button {
   @apply font-cea-icon text-7xl text-cea-grey cursor-pointer h-fit;
+}
+
+/* Projets Section Styling */
+
+.projects-grid {
+  @apply flex items-center justify-end gap-19;
+}
+
+.project-card {
+  @apply flex flex-col justify-between gap-7 w-[30vw] h-full;
+}
+
+.project-thumbnail {
+  @apply w-full h-[20vh] overflow-hidden relative;
+}
+
+.project-thumbnail a {
+  @apply block h-full relative;
+}
+
+.project-thumbnail img {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
+}
+
+.project-thumbnail img.slide-out-left {
+  animation: slideOutLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+.project-thumbnail img.slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+.project-thumbnail img.slide-out-right {
+  animation: slideOutRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+.project-thumbnail img.slide-in-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+.project-content {
+  @apply flex flex-col h-full items-stretch justify-between flex-1 w-[20vw] gap-7;
+}
+
+#btn-projects-navigate {
+  @apply font-cea-icon text-7xl text-cea-grey cursor-pointer h-full;
 }

@@ -138,7 +138,7 @@ get_header(); ?>
             // Query for latest news posts
             $args = array(
                 'post_type' => 'post',
-                'posts_per_page' => -1, // Get all posts
+                'posts_per_page' => 3,
                 'orderby' => 'date',
                 'order' => 'DESC',
             );
@@ -252,45 +252,77 @@ get_header(); ?>
             // Query for latest projects
             $args = array(
                 'post_type' => 'projet',
-                'posts_per_page' => 3,
+                'posts_per_page' => 5,
                 'orderby' => 'date',
                 'order' => 'DESC',
             );
 
             $projects = new WP_Query($args);
 
+            // Store all projects data for JavaScript carousel
+            $projects_data = array();
+            if ($projects->have_posts()) {
+                while ($projects->have_posts()) {
+                    $projects->the_post();
+                    $projects_data[] = array(
+                        'title' => get_the_title(),
+                        'excerpt' => get_the_excerpt(),
+                        'date' => get_the_date('d.m'),
+                        'permalink' => get_the_permalink(),
+                        'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'medium'),
+                    );
+                }
+                wp_reset_postdata();
+            }
+
             if ($projects->have_posts()): ?>
-                <div>
-                    <?php while ($projects->have_posts()):
-                        $projects->the_post(); ?>
-                        <article class="project-card">
-                            <?php if (has_post_thumbnail()): ?>
-                                <div class="project-thumbnail">
+                <div class="projects-grid"
+                    data-projects='<?php echo json_encode($projects_data, JSON_HEX_APOS | JSON_HEX_QUOT); ?>'>
+
+                    <!-- Single arrow button that changes direction -->
+                    <button id="btn-projects-navigate" data-direction="right">→</button>
+                    <div class="flex items-start gap-19">
+
+                    <?php
+                    // Display the first 2 projects
+                    $count = 0;
+                    while ($projects->have_posts() && $count < 2):
+                        $projects->the_post();
+                        $count++;
+                        ?>
+                        <article class="project-card project-card-<?php echo $count; ?>">
+                            <h1 class="w-fit"><span class="text-cea-orange"><?php echo get_the_date('d.m'); ?></span></h1>
+
+
+                            <div class="project-thumbnail">
+                                <?php if (has_post_thumbnail()): ?>
                                     <a href="<?php the_permalink(); ?>">
                                         <?php the_post_thumbnail('medium'); ?>
                                     </a>
-                                </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
 
                             <div class="project-content">
-                                <h3>
+                                <h2 class="w-fit">
                                     <a href="<?php the_permalink(); ?>">
                                         <?php the_title(); ?>
                                     </a>
-                                </h3>
+                                </h2>
 
                                 <?php if (has_excerpt()): ?>
-                                    <div class="project-excerpt">
+                                    <h3 class="project-excerpt">
                                         <?php the_excerpt(); ?>
-                                    </div>
+                                    </h3>
                                 <?php endif; ?>
 
-                                <a href="<?php the_permalink(); ?>">
-                                    Voir le projet
+                                <a class="btn-secondary" href="<?php the_permalink(); ?>">
+                                    En savoir plus
                                 </a>
                             </div>
+
                         </article>
                     <?php endwhile; ?>
+                    </div>
                 </div>
 
             <?php else: ?>
