@@ -5,7 +5,7 @@
 
 get_header(); ?>
 
-<main id="primary" class="site-main flex flex-col gap-32">
+<main id="primary" class="site-main">
     <?php while (have_posts()): ?>
         <?php the_post(); ?>
 

@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Projects Carousel Functionality
     initProjectsCarousel();
+
+    // Year Filter for Membres Page
+    initYearFilter();
+
+    // Membre Content Truncate
+    initMembreContentTruncate();
 });
 
 function initMembresModal() {
@@ -402,4 +408,121 @@ function initProjectsCarousel() {
 
     // Attach event listener
     btnNavigate.addEventListener('click', navigate);
+}
+
+// Year Filter for Membres Page
+function initYearFilter() {
+    const select = document.getElementById('annee-select');
+    const compositions = document.querySelectorAll('.composition-ca');
+    const yearTitle = document.querySelector('.header-title h3');
+
+    if (!select || compositions.length === 0) return;
+
+    select.addEventListener('change', function() {
+        const selectedIndex = this.value;
+        const selectedOption = this.options[this.selectedIndex];
+        const selectedYear = selectedOption.textContent.trim();
+
+        // Hide all compositions
+        compositions.forEach(function(composition) {
+            composition.style.display = 'none';
+        });
+
+        // Show selected composition with fade effect
+        const selectedComposition = document.querySelector('[data-composition-index="' + selectedIndex + '"]');
+        if (selectedComposition) {
+            selectedComposition.style.display = 'block';
+            selectedComposition.style.opacity = '0';
+            setTimeout(function() {
+                selectedComposition.style.transition = 'opacity 0.3s ease-in-out';
+                selectedComposition.style.opacity = '1';
+            }, 10);
+        }
+
+        // Update the year in the title
+        if (yearTitle) {
+            yearTitle.textContent = 'Ses membres ' + selectedYear;
+        }
+
+        // Re-check truncation for the newly displayed composition
+        setTimeout(function() {
+            checkTruncation();
+        }, 350); // After fade-in animation
+    });
+}
+
+// Check truncation for all membre contents
+function checkTruncation() {
+    const membreContents = document.querySelectorAll('.membre-content');
+
+    membreContents.forEach(function(content) {
+        // Reset classes first
+        content.classList.remove('truncated', 'expanded');
+
+        // Check if content is truncated
+        if (content.scrollHeight > content.clientHeight) {
+            content.classList.add('truncated');
+        }
+    });
+}
+
+// Membre Content Truncate and Expand
+function initMembreContentTruncate() {
+    const membreContents = document.querySelectorAll('.membre-content');
+
+    // Initial check
+    setTimeout(function() {
+        checkTruncation();
+    }, 100);
+
+    membreContents.forEach(function(content) {
+        const wrapper = content.parentElement;
+        const expandBtn = wrapper.querySelector('.membre-expand');
+        let collapseTimeout;
+
+
+        // Click on "...plus" to expand
+        if (expandBtn) {
+            expandBtn.addEventListener('click', function() {
+                content.classList.add('expanded');
+                content.classList.remove('truncated');
+                expandBtn.style.display = 'none';
+
+                // Set timeout to collapse after 20 seconds if mouse leaves
+                collapseTimeout = setTimeout(function() {
+                    collapseContent();
+                }, 20000); // 20 seconds
+            });
+        }
+
+        // Mouse leave handler
+        content.addEventListener('mouseleave', function() {
+            if (content.classList.contains('expanded')) {
+                // Clear existing timeout first
+                if (collapseTimeout) {
+                    clearTimeout(collapseTimeout);
+                }
+                // Start 20-second countdown
+                collapseTimeout = setTimeout(function() {
+                    collapseContent();
+                }, 20000); // 20 seconds
+            }
+        });
+
+        // Mouse enter handler - cancel collapse
+        content.addEventListener('mouseenter', function() {
+            if (collapseTimeout) {
+                clearTimeout(collapseTimeout);
+                collapseTimeout = null;
+            }
+        });
+
+        function collapseContent() {
+            content.classList.remove('expanded');
+            content.classList.add('truncated');
+            if (expandBtn) {
+                expandBtn.style.display = 'inline';
+            }
+        }
+    });
 }

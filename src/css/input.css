@@ -206,6 +206,9 @@ p {
   @apply flex items-center justify-center w-10 h-10;
 }
 
+.site-main {
+  @apply flex flex-col gap-32;
+}
 /* Header Section Styling */
 .header-section {
   @apply grid grid-cols-12 w-screen items-end;
@@ -458,4 +461,116 @@ p {
 
 #btn-projects-navigate {
   @apply font-cea-icon text-7xl text-cea-grey cursor-pointer h-full;
+}
+
+/* Select Year Dropdown */
+.select-wrapper {
+  @apply relative cursor-pointer;
+}
+
+.select-year {
+  /* Cacher la flèche par défaut du navigateur */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Ajouter de l'espace pour la flèche personnalisée */
+  @apply pr-10 cursor-pointer;
+
+  /* Enlever le border radius et l'ombre */
+  border-radius: 0;
+  box-shadow: none;
+
+  /* Background blanc pour le dropdown */
+  background-color: white;
+}
+
+/* Enlever border radius et ombre du menu déroulant */
+.select-year:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.select-year option {
+  @apply bg-white text-cea-grey;
+  border-radius: 0;
+}
+
+.select-year option:hover {
+  @apply text-black;
+}
+
+.select-wrapper::after {
+  content: '⇵';
+  @apply absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-lg text-cea-orange;
+}
+
+/* Informations Page Styling */
+
+/* Bureau Section Styling */
+
+.bureau-section {
+  @apply flex flex-col gap-24;
+}
+
+.bureau-card {
+  @apply grid grid-cols-12;
+}
+
+.bureau-info {
+  @apply col-span-4 col-start-2 border-t border-t-black pt-5;
+}
+
+.bureau-title {
+  @apply col-span-5 col-start-6 border-t border-t-black pt-5;
+}
+
+/* Membres Page Styling */
+
+.cea-grid {
+  @apply grid grid-cols-12 gap-x-9 gap-y-20;
+  padding-left: calc((100% / 12) * 1); /* 1 colonne de marge à gauche */
+  padding-right: calc((100% / 12) * 1); /* 1 colonne de marge à droite */
+}
+
+.cea-membre {
+  @apply flex flex-col gap-3.5 col-span-4;
+}
+
+.membre-info {
+  @apply flex flex-col gap-5 p-2.5 border-t border-t-black;
+}
+
+.fonction-badge {
+  @apply text-cea-orange;
+}
+
+.membre-etudes {
+  @apply text-cea-grey;
+}
+
+.membre-content-wrapper {
+  @apply relative;
+}
+
+.membre-content {
+  @apply overflow-hidden;
+  max-height: 10vh;
+  transition: max-height 0.3s ease;
+}
+
+.membre-content.expanded {
+  max-height: none;
+}
+
+.membre-expand {
+  @apply inline text-cea-orange cursor-pointer;
+  display: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.membre-content.truncated + .membre-expand {
+  display: inline;
 }
