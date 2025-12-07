@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Members Modal Functionality
     initMembresModal();
+
+    // News Carousel Functionality
+    initNewsCarousel();
 });
 
 function initMembresModal() {
@@ -107,4 +110,135 @@ function initMembresModal() {
             closeModal();
         }
     });
+}
+
+// News carousel functionality
+function initNewsCarousel() {
+    // Get articles data from data attribute
+    const carouselContainer = document.querySelector('[data-news-articles]');
+    if (!carouselContainer) return;
+
+    const articles = JSON.parse(carouselContainer.dataset.newsArticles);
+    if (!articles || articles.length === 0) return;
+
+    let currentIndex = 0;
+
+    // Get DOM elements
+    const mainCard = document.querySelector('.news-card');
+    const prevCard = document.querySelector('.news-prevcard');
+    const btnPrev = document.getElementById('btn-news-prev');
+    const btnNext = document.getElementById('btn-news-next');
+
+    if (!mainCard || !prevCard || !btnPrev || !btnNext) return;
+
+    // Update main article display
+    function updateMainArticle(index) {
+        const article = articles[index];
+
+        // Update thumbnail with animation
+        const thumbnail = mainCard.querySelector('.news-thumbnail a');
+        if (thumbnail && article.thumbnail) {
+            thumbnail.href = article.permalink;
+            const oldImg = thumbnail.querySelector('img');
+
+            if (oldImg && article.thumbnail) {
+                // Create new image element
+                const newImg = document.createElement('img');
+                newImg.src = article.thumbnail;
+                newImg.alt = article.title;
+                newImg.className = 'h-full w-auto object-cover slide-in-right';
+
+                // Add old image slide-out animation
+                oldImg.classList.add('slide-out-left');
+
+                // Add new image to container
+                thumbnail.appendChild(newImg);
+
+                // After animation completes, remove old image
+                setTimeout(() => {
+                    oldImg.remove();
+                    newImg.classList.remove('slide-in-right');
+                }, 600);
+            }
+        }
+
+        // Update date
+        const date = mainCard.querySelector('.news-meta p');
+        if (date) date.textContent = article.date;
+
+        // Update read more link
+        const readMore = mainCard.querySelector('.news-meta a');
+        if (readMore) readMore.href = article.permalink;
+
+        // Update title
+        const title = mainCard.querySelector('h2 a');
+        if (title) {
+            title.href = article.permalink;
+            title.textContent = article.title;
+        }
+
+        // Update excerpt
+        const excerpt = mainCard.querySelector('.news-excerpt');
+        if (excerpt) excerpt.textContent = article.excerpt;
+    }
+
+    // Update preview article display
+    function updatePreviewArticle(index) {
+        const article = articles[index];
+
+        // Update date
+        const date = prevCard.querySelector('p');
+        if (date) date.textContent = article.date;
+
+        // Update thumbnail with animation
+        const thumbnail = prevCard.querySelector('.news-prevthumbnail a');
+        if (thumbnail && article.thumbnail_medium) {
+            thumbnail.href = article.permalink;
+            const oldImg = thumbnail.querySelector('img');
+
+            if (oldImg && article.thumbnail_medium) {
+                // Create new image element
+                const newImg = document.createElement('img');
+                newImg.src = article.thumbnail_medium;
+                newImg.alt = article.title;
+                newImg.className = 'w-full h-full object-cover slide-in-right';
+
+                // Add old image slide-out animation
+                oldImg.classList.add('slide-out-left');
+
+                // Add new image to container
+                thumbnail.appendChild(newImg);
+
+                // After animation completes, remove old image
+                setTimeout(() => {
+                    oldImg.remove();
+                    newImg.classList.remove('slide-in-right');
+                }, 600);
+            }
+        }
+    }
+
+    // Navigate to next article
+    function nextArticle(e) {
+        e.preventDefault();
+        currentIndex = (currentIndex + 1) % articles.length;
+        const previewIndex = (currentIndex + 1) % articles.length;
+
+        updateMainArticle(currentIndex);
+        updatePreviewArticle(previewIndex);
+    }
+
+    // Navigate to previous article
+    function prevArticle(e) {
+        e.preventDefault();
+        currentIndex = (currentIndex - 1 + articles.length) % articles.length;
+        const previewIndex = (currentIndex + 1) % articles.length;
+
+        updateMainArticle(currentIndex);
+        updatePreviewArticle(previewIndex);
+    }
+
+    // Attach event listeners
+    btnNext.addEventListener('click', nextArticle);
+    btnPrev.addEventListener('click', prevArticle);
 }

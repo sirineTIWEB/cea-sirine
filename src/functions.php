@@ -50,5 +50,6 @@ function theme_cea_sirine_scripts() {
 
     // Main JavaScript
     wp_enqueue_script('theme-cea-sirine-main', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0.0', true);
+
 }
 add_action('wp_enqueue_scripts', 'theme_cea_sirine_scripts');

@@ -20,33 +20,33 @@ body {
 /* Composants personnalisés */
 @layer components {
   .btn-primary {
-    @apply text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-semibold inline-block;
+    @apply text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
   }
 
-  .btn-primary::after {
+  .btn-primary::after,
+  .btn-secondary::after {
     content: ' →';
     display: inline;
     white-space: nowrap;
   }
-  
+
   .btn-secondary {
-    @apply px-6 py-3 bg-amber-500 text-white font-semibold rounded-lg;
-    @apply hover:bg-amber-600 transition-all duration-200;
+    @apply text-base px-2.5 py-1 border-b-cea-grey border-b-2 text-cea-grey font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
   }
 
   .btn-icon {
     @apply text-cea-grey text-3xl font-cea-icon;
   }
-  
+
   .card {
     @apply bg-white rounded-xl shadow-lg overflow-hidden p-6;
     @apply hover:shadow-2xl transition-shadow duration-300;
   }
-  
+
   .container-cea {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply flex flex-col gap-24;
   }
-  
+
   .section {
     @apply py-12 md:py-16 lg:py-20;
   }
@@ -83,20 +83,22 @@ body {
 
 /* Animations CSS */
 @keyframes fadeIn {
-  from { 
-    opacity: 0; 
+  from {
+    opacity: 0;
   }
-  to { 
-    opacity: 1; 
+
+  to {
+    opacity: 1;
   }
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(30px);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }
@@ -131,9 +133,9 @@ h2 {
 
 .page-content h4 {
   @apply text-xl font-bold text-gray-900 mt-6 mb-3;
-} */
+}
 
-h3 {
+*/ h3 {
   @apply text-xl font-light;
 }
 
@@ -204,6 +206,27 @@ p {
   @apply flex items-center justify-center w-10 h-10;
 }
 
+/* Header Section Styling */
+.header-section {
+  @apply grid grid-cols-12 w-screen items-end;
+}
+
+.header-title {
+  @apply col-start-2 col-span-7 flex flex-col;
+}
+
+.header-title h1 {
+  @apply w-full;
+}
+
+.header-title h3 {
+  @apply w-1/2;
+}
+
+.header-btn {
+  @apply col-end-12 col-span-1 justify-self-end;
+}
+
 /* Members Modal Styling */
 .membre-modal {
   backdrop-filter: blur(2px);
@@ -218,6 +241,7 @@ p {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -228,6 +252,7 @@ p {
     opacity: 0;
     transform: scale(0.95) translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -235,6 +260,7 @@ p {
 }
 
 /* Custom scrollbar for modal */
+
 .membre-modal .modal-dialog::-webkit-scrollbar {
   width: 8px;
 }
@@ -251,4 +277,117 @@ p {
 
 .membre-modal .modal-dialog::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+/* Activities Section Styling */
+
+.activities-section {
+  @apply flex flex-col gap-24;
+}
+
+.activity-card {
+  @apply h-fit grid grid-cols-12;
+}
+
+.activity-info {
+  @apply flex flex-col col-span-4 col-start-2 pt-5 border-t border-t-black;
+}
+
+.activity-title {
+  @apply col-start-6 col-span-5 pt-5 border-t border-t-black;
+}
+
+.activity-btn {
+  @apply col-start-11 col-span-1 flex justify-end pt-5 border-t border-t-black;
+}
+
+
+/* News Section Styling */
+.news-grid {
+  @apply grid grid-cols-12 grid-rows-2
+}
+
+.news-card {
+  @apply col-span-8 grid grid-cols-8 row-span-2;
+}
+
+.news-thumbnail {
+  @apply col-span-5 overflow-hidden relative aspect-square;
+}
+
+.news-thumbnail a {
+  @apply block h-full relative;
+}
+
+.news-thumbnail img {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
+}
+
+.news-thumbnail img.slide-out-left {
+  animation: slideOutLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+.news-thumbnail img.slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.news-content {
+  @apply col-span-3 flex flex-col justify-between ml-5;
+}
+
+.news-meta {
+  @apply flex flex-col gap-1;
+}
+
+.news-prevcard {
+  @apply col-start-10 col-span-3 flex flex-col items-start justify-end row-start-2 row-span-1;
+}
+
+.news-prevthumbnail {
+  @apply h-full overflow-hidden w-full h-full relative;
+}
+
+.news-prevthumbnail a {
+  @apply block h-full relative;
+}
+
+.news-prevthumbnail img {
+  @apply absolute top-0 left-0 w-full h-full object-cover aspect-square;
+}
+
+.news-prevthumbnail img.slide-out-left {
+  animation: slideOutLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+.news-prevthumbnail img.slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+.btn-prevcard {
+  @apply row-start-1 col-start-10 flex justify-between col-span-2;
+}
+
+.btn-prevcard button {
+  @apply font-cea-icon text-7xl text-cea-grey cursor-pointer h-fit;
 }
