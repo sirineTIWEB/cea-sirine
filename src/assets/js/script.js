@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Membre Content Truncate
     initMembreContentTruncate();
+
+    // Initialize button swipe animation
+    initButtonSwipe();
 });
 
 function initMembresModal() {
@@ -523,6 +526,34 @@ function initMembreContentTruncate() {
             if (expandBtn) {
                 expandBtn.style.display = 'inline';
             }
+        }
+    });
+}
+
+// Initialize button swipe animation
+function initButtonSwipe() {
+    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-nav, .btn-nav-mobile');
+
+    buttons.forEach(button => {
+        // Get the text content (includes the arrow from CSS ::after)
+        let text = button.textContent.trim();
+
+        // Remove any existing arrow from the text if present
+        text = text.replace(/\s*→\s*$/, '').trim();
+
+        // Add arrow only for primary and secondary buttons, not nav or mobile nav
+        const isNav = button.classList.contains('btn-nav') || button.classList.contains('btn-nav-mobile');
+        const displayText = isNav ? text : text + ' →';
+
+        // Store it in data attribute for CSS to use
+        button.setAttribute('data-text', displayText);
+
+        // For mobile nav, preserve the span structure
+        if (button.classList.contains('btn-nav-mobile')) {
+            button.innerHTML = `<span><div class="btn-text">${displayText}</div></span>`;
+        } else {
+            // Wrap the content in a div with class btn-text (not span to avoid span styling)
+            button.innerHTML = `<div class="btn-text">${displayText}</div>`;
         }
     });
 }

@@ -212,15 +212,15 @@ $footer_page_id = get_option('footer_settings_page_id');
 
     <!-- Bottom Footer -->
     <div class="bottom-footer">
-        <div class="container-cea py-6">
-            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <div class="text-center md:text-left">
+        <div class="py-3 lg:py-6">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-2 lg:gap-0">
+                <div class="text-center lg:text-left">
                     <p class="text-gray-400 text-sm">
                         &copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?>.
                         <?php esc_html_e('Tous droits réservés.', 'theme-cea-prof'); ?>
                     </p>
                 </div>
-                <div class="flex space-x-6 text-sm">
+                <div class="flex flex-col lg:flex-row gap-2 lg:gap-3 text-sm items-center">
                     <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Mentions
                         légales</a>
                     <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Politique de

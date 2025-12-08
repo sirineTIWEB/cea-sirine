@@ -21,7 +21,7 @@ get_header(); ?>
                     <span>CEA</span></a>
             </div>
             <?php if (has_post_thumbnail()): ?>
-                <div class="w-screen h-[40vh] bg-cover overflow-hidden">
+                <div class="w-screen h-[30vh] lg:h-[40vh] bg-cover overflow-hidden">
                     <?php the_post_thumbnail(); ?>
                 </div>
             <?php endif; ?>

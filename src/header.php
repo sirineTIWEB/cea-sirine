@@ -74,8 +74,9 @@
               $attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
               $attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-              // h3 style: text-xl font-light
-              $link_class = 'text-xl font-light text-black hover:text-cea-orange transition-colors duration-200 no-underline';
+              // Check if this is the current menu item
+              $is_current = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) || in_array('current-menu-ancestor', $classes) || in_array('current-page-ancestor', $classes);
+              $link_class = 'btn-nav text-xl font-light' . ($is_current ? ' active' : '');
 
               $item_output = isset($args->before) ? $args->before : '';
               $item_output .= '<a' . $attributes . ' class="' . $link_class . '">';
@@ -105,8 +106,8 @@
       </div>
 
       <!-- Mobile Header -->
-      <div class="md:hidden container-cea">
-        <div class="flex items-center justify-between h-16">
+      <div class="md:hidden grid grid-cols-12 w-screen">
+        <div class="col-start-2 col-end-12 flex items-center justify-between h-16">
           <!-- Site Branding -->
           <div class="site-branding flex items-center space-x-3">
             <?php if (has_custom_logo()): ?>
@@ -134,19 +135,19 @@
 
           <!-- Mobile Menu Button -->
           <button
-            class="menu-toggle flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            class="menu-toggle flex items-center justify-center w-10 h-10 transition-colors duration-200 cursor-pointer"
             aria-controls="primary-menu" aria-expanded="false" type="button">
             <span class="sr-only"><?php esc_html_e('Toggle navigation menu', 'theme-cea-prof'); ?></span>
             <!-- Hamburger Icon -->
-            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-cea-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <nav class="mobile-navigation md:hidden hidden">
-          <div class="py-4 border-t border-gray-200">
+        <nav class="mobile-navigation md:hidden hidden col-start-2 col-end-12">
+          <div class="py-2 lg:py-4">
             <?php
             wp_nav_menu(
               array(
@@ -173,14 +174,12 @@
 
                 // Check if this is the current menu item
                 $is_current = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes) || in_array('current-menu-ancestor', $classes) || in_array('current-page-ancestor', $classes);
-                $link_class = $is_current
-                  ? 'block px-4 py-2 text-blue-700 bg-blue-50 font-bold transition-all duration-200 no-underline rounded-md'
-                  : 'block px-4 py-2 text-gray-700 hover:text-blue-700 hover:bg-gray-50 font-medium transition-all duration-200 no-underline rounded-md';
+                $link_class = 'btn-nav-mobile text-xl font-light' . ($is_current ? ' active' : '');
 
                 $item_output = isset($args->before) ? $args->before : '';
-                $item_output .= '<a' . $attributes . ' class="' . $link_class . '">';
-                $item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
-                $item_output .= '</a>';
+                $item_output .= '<h1><a' . $attributes . ' class="' . $link_class . '">';
+                $item_output .= '<span>' . (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '') . '</span>';
+                $item_output .= '</a></h1>';
                 $item_output .= isset($args->after) ? $args->after : '';
 
                 $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
