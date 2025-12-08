@@ -175,11 +175,11 @@ p {
 /* Footer Styling */
 
 .site-footer {
-  @apply bg-cea-light-grey text-black grid grid-cols-12 grid-rows-2 gap-12 h-fit;
+  @apply bg-cea-light-grey text-black grid grid-cols-12 gap-12 h-fit;
 }
 
 .footer-cea {
-  @apply flex items-end justify-between gap-16 col-start-2 col-end-12;
+  @apply flex items-end justify-evenly gap-16 col-start-2 col-end-12 py-12;
 }
 
 .bottom-footer {
