@@ -19,7 +19,8 @@ body {
 
 /* Composants personnalisés */
 @layer components {
-  .btn-primary {
+  .btn-primary,
+  .btn-nav {
     @apply text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
   }
 
