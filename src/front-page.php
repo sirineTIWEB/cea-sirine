@@ -25,7 +25,7 @@ get_header(); ?>
                     <?php the_post_thumbnail(); ?>
                 </div>
             <?php endif; ?>
-            <div class="w-full grid grid-cols-12 lg:bg-white md:bg-blue-200 sm:bg-blue-300 bg-blue-400">
+            <div class="w-full grid grid-cols-12">
                 <h2 class="col-start-6 col-span-6"><?php
                 if (is_singular()):
                     the_content();

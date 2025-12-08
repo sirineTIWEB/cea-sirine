@@ -21,7 +21,7 @@ body {
 @layer components {
   .btn-primary,
   .btn-nav {
-    @apply text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
+    @apply text-sm lg:text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
   }
 
   .btn-primary::after,
@@ -32,11 +32,11 @@ body {
   }
 
   .btn-secondary {
-    @apply text-base px-2.5 py-1 border-b-cea-grey border-b-2 text-cea-grey font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
+    @apply text-sm lg:text-base px-2.5 py-1 border-b-cea-grey border-b-2 text-cea-grey font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit;
   }
 
   .btn-icon {
-    @apply text-cea-grey text-3xl font-cea-icon;
+    @apply text-cea-grey text-2xl lg:text-3xl font-cea-icon;
   }
 
   .card {
@@ -117,7 +117,7 @@ body {
 /* Page content styling */
 
 h1 {
-  @apply text-8xl capitalize text-black font-medium;
+  @apply text-4xl lg:text-8xl capitalize text-black font-medium;
 }
 
 h1 span {
@@ -129,7 +129,7 @@ span {
 }
 
 h2 {
-  @apply text-3xl font-bold text-black;
+  @apply text-xl lg:text-3xl font-bold text-black;
 }
 
 /* .page-content h4 {
@@ -137,11 +137,11 @@ h2 {
 } */
 
 h3 {
-  @apply text-xl font-light;
+  @apply text-base lg:text-xl font-light;
 }
 
 p {
-  @apply font-cea-span text-base;
+  @apply font-cea-span text-sm lg:text-base;
 }
 
 .page-content ol {
