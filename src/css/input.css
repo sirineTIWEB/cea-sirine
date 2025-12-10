@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://use.typekit.net/iis6mvj.css");
 /* Variables CSS personnalisées CEA */
 
 @theme {
@@ -412,10 +411,49 @@ p {
   @apply border-l-4 border-blue-700 pl-6 py-2 my-6 italic text-gray-700;
 }
 
+/* Newsletters Styling */
+
+.sub-section {
+  @apply grid grid-cols-12 h-max items-center content-center gap-6 lg:gap-0;
+}
+
+.sub-header {
+  @apply col-start-2 col-span-10 h-fit self-start lg:col-start-2 lg:col-span-5;
+}
+
+.sub-form {
+  @apply col-start-2 col-span-10 h-fit self-start lg:col-start-8 lg:col-span-4;
+}
+
+/* edit the blue border on active */
+.wpcf7-form-control-wrap {
+  @apply border-b border-b-cea-grey;
+  font-family: aktiv-grotesk, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.wpcf7-form-control-wrap:focus-within {
+  @apply border-b-cea-orange;
+}
+
+.wpcf7-form-control {
+  @apply outline-none border-none w-full text-cea-orange;
+}
+
+.wpcf7-form {
+  @apply flex flex-col gap-6;
+}
+
+.wpcf7-submit {
+  @apply border-b border-b-cea-orange;
+}
+
 /* Footer Styling */
 
+
 .site-footer {
-  @apply bg-cea-light-grey text-black grid grid-cols-12 gap-6 lg:gap-12 h-fit mt-12 lg:mt-24;
+  @apply text-black grid grid-cols-12 gap-6 lg:gap-12 h-fit mt-12 lg:mt-24;
 }
 
 .footer-cea {

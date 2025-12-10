@@ -45,11 +45,17 @@ add_action('after_setup_theme', 'theme_cea_sirine_setup');
 
 // Enqueue scripts and styles
 function theme_cea_sirine_scripts() {
+    // Adobe Fonts (Typekit)
+    wp_enqueue_style('adobe-fonts', 'https://use.typekit.net/iis6mvj.css', array(), null);
+
     // Main stylesheet
     wp_enqueue_style('theme-cea-sirine-style', get_stylesheet_uri());
 
     // Main JavaScript
     wp_enqueue_script('theme-cea-sirine-main', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0.0', true);
+
+    // Contact Form animation
+    wp_enqueue_script('theme-cea-contact-form', get_template_directory_uri() . '/js/contact-form.js', array(), '1.0.0', true);
 
 }
 add_action('wp_enqueue_scripts', 'theme_cea_sirine_scripts');
