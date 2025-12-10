@@ -20,7 +20,7 @@ get_header(); ?>
             // Query for ongoing projects (latest 2)
             $args_current = array(
                 'post_type' => 'projet',
-                'posts_per_page' => 2,
+                'posts_per_page' => -1,
                 'orderby' => 'date',
                 'order' => 'DESC',
             );
@@ -35,8 +35,10 @@ get_header(); ?>
                     $projets_current->the_post();
                     $exclude_ids[] = get_the_ID();
                     $projects_data[] = array(
+                        'id' => get_the_ID(),
                         'title' => get_the_title(),
                         'excerpt' => get_the_excerpt(),
+                        'content' => apply_filters('the_content', get_the_content()),
                         'date' => get_the_date(),
                         'permalink' => get_the_permalink(),
                         'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'large'),
@@ -47,68 +49,37 @@ get_header(); ?>
                 $projets_current->rewind_posts();
             }
 
-            if ($projets_current->have_posts()):
-                $projets_current->the_post();
-                // Get the FIRST project
-                ?>
-                <div class="news-grid grid grid-cols-12 grid-rows-2"
+            if ($projets_current->have_posts()): ?>
+                <div class="proj-grid"
                     data-news-articles='<?php echo json_encode($projects_data, JSON_HEX_APOS | JSON_HEX_QUOT); ?>'>
-                    <article class="news-card">
-                        <?php if (has_post_thumbnail()): ?>
-                            <div class="news-thumbnail">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300']); ?>
-                                </a>
-                            </div>
-                        <?php endif; ?>
-
-                        <div class="news-content">
-                            <div class="news-meta">
-                                <a class="btn-secondary" href="<?php the_permalink(); ?>">
-                                    Voir le projet
-                                </a>
-                                <p>
-                                    <?php echo get_the_date(); ?>
-                                </p>
-                            </div>
-
-                            <div>
-                                <h2>
+                    <?php while ($projets_current->have_posts()):
+                        $projets_current->the_post(); ?>
+                        <article class="proj-card">
+                            <?php if (has_post_thumbnail()): ?>
+                                <div class="proj-thumbnail">
                                     <a href="<?php the_permalink(); ?>">
-                                        <?php the_title(); ?>
+                                        <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300']); ?>
                                     </a>
-                                </h2>
+                                </div>
+                            <?php endif; ?>
 
-                                <?php if (has_excerpt()): ?>
-                                    <h3 class="news-excerpt">
-                                        <?php the_excerpt(); ?>
-                                    </h3>
-                                <?php endif; ?>
-                            </div>
-
-                        </div>
-                    </article>
-
-                    <?php
-                    // Get the SECOND project if it exists
-                    if ($projets_current->have_posts()):
-                        $projets_current->the_post();
-                        ?>
-                        <div class="btn-prevcard">
-                            <button id="btn-news-prev">←</button>
-                            <button id="btn-news-next">→</button>
-                        </div>
-                        <article class="news-prevcard">
-                            <p>
-                                <?php echo get_the_date(); ?>
-                            </p>
-                            <div class="news-prevthumbnail">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover hover:scale-110 transition-transform duration-300']); ?>
-                                </a>
+                            <div class="proj-content">
+                                    <h2>
+                                        <a href="<?php the_permalink(); ?>">
+                                            <?php the_title(); ?>
+                                        </a>
+                                    </h2>
+                                    <h3><?php the_content(); ?></h3>
                             </div>
                         </article>
-                    <?php endif; ?>
+                        <div class="proj-date">
+                            <p><?php echo get_the_date(); ?></p>
+                        </div>
+                    <?php endwhile; ?>
+                    <div class="proj-arrow">
+                        <button id="btn-proj-prev">←</button>
+                        <button id="btn-proj-next">→</button>
+                    </div>
                 </div>
 
             <?php else: ?>

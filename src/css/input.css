@@ -724,7 +724,126 @@ p {
   @apply font-cea-icon text-7xl text-cea-grey cursor-pointer h-fit;
 }
 
-/* Projets Section Styling */
+/* Projet Section in Section Page Styling */
+.proj-grid {
+  @apply grid grid-cols-12 gap-x-4 grid-rows-2;
+}
+
+.proj-card {
+  @apply col-span-3 grid grid-cols-2 auto-rows-auto gap-y-2;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.proj-card.active {
+  grid-column: 7 / span 4;
+  grid-row: 1 / span 1;
+}
+
+.proj-date {
+  @apply col-start-7 row-start-2 h-fit;
+}
+
+.proj-arrow {
+  @apply col-start-11 row-start-2 col-end-12 flex justify-end gap-2 h-fit;
+}
+
+.proj-arrow button {
+  @apply font-cea-icon text-2xl text-cea-grey cursor-pointer;
+}
+
+.proj-thumbnail {
+  @apply col-span-2 overflow-hidden relative aspect-square border border-cea-orange p-2;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.proj-thumbnail a {
+  @apply block h-full relative;
+}
+
+.proj-thumbnail img {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
+}
+
+.proj-thumbnail img.slide-out-left {
+  animation: slideOutLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+.proj-thumbnail img.slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.proj-content {
+  @apply col-span-2;
+}
+
+.proj-content h2 {
+  transition: all 0.4s ease;
+}
+
+.proj-content h3 {
+  @apply hidden opacity-0;
+  transition: opacity 0.4s ease;
+}
+
+.proj-card.active .proj-content h3 {
+  @apply block opacity-100;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.proj-date {
+  @apply hidden;
+}
+
+.proj-card.active + .proj-date {
+  @apply block;
+}
+/* Projets Section in Front-Page Styling */
 
 .projects-grid {
   @apply flex items-center justify-end gap-19;

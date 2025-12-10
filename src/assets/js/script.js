@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Projects Carousel Functionality
     initProjectsCarousel();
 
+    // Projets Page Carousel Functionality
+    initProjetsCarousel();
+
     // Year Filter for Membres Page
     initYearFilter();
 
@@ -412,6 +415,109 @@ function initProjectsCarousel() {
 
     // Attach event listener
     btnNavigate.addEventListener('click', navigate);
+}
+
+// Projets Page Carousel - Loop Effect with Active State at Row 7
+function initProjetsCarousel() {
+    const projGrid = document.querySelector('.proj-grid');
+    if (!projGrid) return;
+
+    const projetsData = JSON.parse(projGrid.dataset.newsArticles);
+    if (!projetsData || projetsData.length === 0) return;
+
+    let currentActiveIndex = 0;
+
+    const btnPrev = document.getElementById('btn-proj-prev');
+    const btnNext = document.getElementById('btn-proj-next');
+
+    if (!btnPrev || !btnNext) return;
+
+    const projCards = document.querySelectorAll('.proj-card');
+    const projDates = document.querySelectorAll('.proj-date');
+
+    // Set initial active state
+    function setActiveCard(index) {
+        // Remove active class from all cards
+        projCards.forEach(card => card.classList.remove('active'));
+
+        // Add active class to current card
+        if (projCards[index]) {
+            projCards[index].classList.add('active');
+        }
+
+        // Update all cards with their data
+        projCards.forEach((card, cardIndex) => {
+            const dataIndex = (index + cardIndex) % projetsData.length;
+            updateCard(card, projetsData[dataIndex], projDates[cardIndex]);
+        });
+    }
+
+    // Update individual card content
+    function updateCard(card, projet, dateElement) {
+        // Update thumbnail with slide animation
+        const thumbnail = card.querySelector('.proj-thumbnail a');
+        if (thumbnail && projet.thumbnail) {
+            thumbnail.href = projet.permalink;
+            const oldImg = thumbnail.querySelector('img');
+
+            if (oldImg && projet.thumbnail) {
+                const newImg = document.createElement('img');
+                newImg.src = projet.thumbnail;
+                newImg.alt = projet.title;
+                newImg.className = 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300 slide-in-right';
+
+                oldImg.classList.add('slide-out-left');
+                thumbnail.appendChild(newImg);
+
+                setTimeout(() => {
+                    oldImg.remove();
+                    newImg.classList.remove('slide-in-right');
+                }, 600);
+            }
+        }
+
+        // Update title
+        const titleLink = card.querySelector('.proj-content h2 a');
+        if (titleLink) {
+            titleLink.href = projet.permalink;
+            titleLink.textContent = projet.title;
+        }
+
+        // Update content (h3)
+        const contentElement = card.querySelector('.proj-content h3');
+        if (contentElement && projet.content) {
+            contentElement.innerHTML = projet.content;
+        }
+
+        // Update date element (only visible for active card)
+        if (dateElement) {
+            const dateP = dateElement.querySelector('p');
+            if (dateP) {
+                dateP.textContent = projet.date;
+            }
+        }
+    }
+
+    // Navigate to next project
+    function nextProject(e) {
+        e.preventDefault();
+        currentActiveIndex = (currentActiveIndex + 1) % projetsData.length;
+        setActiveCard(currentActiveIndex);
+    }
+
+    // Navigate to previous project
+    function prevProject(e) {
+        e.preventDefault();
+        currentActiveIndex = (currentActiveIndex - 1 + projetsData.length) % projetsData.length;
+        setActiveCard(currentActiveIndex);
+    }
+
+    // Attach event listeners
+    btnNext.addEventListener('click', nextProject);
+    btnPrev.addEventListener('click', prevProject);
+
+    // Initialize first active card
+    setActiveCard(currentActiveIndex);
 }
 
 // Year Filter for Membres Page

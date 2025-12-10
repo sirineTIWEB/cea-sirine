@@ -28,7 +28,9 @@ get_header(); ?>
                     <h1 class="single-title"><?php the_title(); ?></h1>
                     <h3><?php the_content(); ?></h3>
                 </div>
-                <a class="btn-primary-reverse" data-text="← Retour" href="#" onclick="history.back(); return false;">← Retour</a>
+                <a class="btn-primary-reverse" data-text="← Retour" href="#" onclick="history.back(); return false;">
+                    <span class="btn-text">← Retour</span>
+                </a>
             </div>
         </article>
 
