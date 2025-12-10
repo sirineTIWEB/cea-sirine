@@ -12,11 +12,11 @@ get_header(); ?>
             <div class="header-title">
                 <?php
                 if (is_category()) {
-                    echo '<h1>' . single_cat_title('', false) . '</h1>';
+                    echo '<h1>' . single_cat_title('', false) . ' ARCH</h1>';
                 } elseif (is_tag()) {
-                    echo '<h1>Tag: ' . single_tag_title('', false) . '</h1>';
+                    echo '<h1>Tag: ' . single_tag_title('', false) . ' ARCH</h1>';
                 } elseif (is_author()) {
-                    echo '<h1>Auteur: ' . get_the_author() . '</h1>';
+                    echo '<h1>Auteur: ' . get_the_author() . ' ARCH</h1>';
                 } elseif (is_date()) {
                     echo '<h1>Archives</h1>';
                 } else {
@@ -79,8 +79,8 @@ get_header(); ?>
                 <h1>Aucun article trouvé</h1>
                 <h3>Il semble qu'aucun article ne corresponde à votre recherche.</h3>
             </div>
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="header-btn btn-primary">
-                Retour à l'accueil
+            <a data-text="← Retour à l'accueil" href="<?php echo esc_url(home_url('/')); ?>" class="header-btn btn-primary-reverse">
+                ← Retour à l'accueil
             </a>
         </div>
 

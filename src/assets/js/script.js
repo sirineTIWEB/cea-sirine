@@ -158,7 +158,7 @@ function initNewsCarousel() {
                 const newImg = document.createElement('img');
                 newImg.src = article.thumbnail;
                 newImg.alt = article.title;
-                newImg.className = 'h-full w-auto object-cover slide-in-right';
+                newImg.className = 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300 slide-in-right';
 
                 // Add old image slide-out animation
                 oldImg.classList.add('slide-out-left');
@@ -213,7 +213,7 @@ function initNewsCarousel() {
                 const newImg = document.createElement('img');
                 newImg.src = article.thumbnail_medium;
                 newImg.alt = article.title;
-                newImg.className = 'w-full h-full object-cover slide-in-right';
+                newImg.className = 'w-full h-full object-cover hover:scale-110 transition-transform duration-300 slide-in-right';
 
                 // Add old image slide-out animation
                 oldImg.classList.add('slide-out-left');
@@ -311,7 +311,7 @@ function initProjectsCarousel() {
                     const newImg = document.createElement('img');
                     newImg.src = project.thumbnail;
                     newImg.alt = project.title;
-                    newImg.className = slideInClass;
+                    newImg.className = `hover:scale-110 transition-transform duration-300 ${slideInClass}`;
 
                     // Add old image slide-out animation
                     oldImg.classList.add(slideOutClass);
@@ -329,13 +329,14 @@ function initProjectsCarousel() {
                     const newImg = document.createElement('img');
                     newImg.src = project.thumbnail;
                     newImg.alt = project.title;
+                    newImg.className = 'hover:scale-110 transition-transform duration-300';
                     thumbnail.appendChild(newImg);
                 }
             } else {
                 // No existing link, create the structure
                 thumbnailDiv.innerHTML = `
                     <a href="${project.permalink}">
-                        <img src="${project.thumbnail}" alt="${project.title}">
+                        <img src="${project.thumbnail}" alt="${project.title}" class="hover:scale-110 transition-transform duration-300">
                     </a>
                 `;
             }

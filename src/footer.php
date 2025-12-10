@@ -22,7 +22,7 @@ $footer_page_id = get_option('footer_settings_page_id');
                 <form>
                     <input type="email" placeholder="Votre email"
                         class="text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-cea-icon font-semibold inline-block text-nowrap w-fit h-fit">
-                    <button type="submit" class="btn-primary"></button>
+                    <button type="submit" class="btn-primary">→</button>
                 </form>
             <?php endif; ?>
         </div>

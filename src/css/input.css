@@ -51,6 +51,39 @@ body {
     transform: translateX(0);
   }
 
+  /* Reverse primary button */
+  .btn-primary-reverse {
+    @apply text-sm lg:text-base px-2.5 py-1 border-b-cea-orange border-b-2 text-cea-orange font-cea-icon font-semibold text-nowrap w-fit h-fit;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .btn-primary-reverse .btn-text {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary-reverse::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: inherit;
+    white-space: nowrap;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(100%);
+  }
+
+  .btn-primary-reverse:hover .btn-text {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  .btn-primary-reverse:hover::before {
+    transform: translateX(0);
+  }
+
   /* Navigation buttons */
   .btn-nav {
     @apply text-xl font-light px-2.5 py-1 text-nowrap w-fit h-fit;
@@ -382,7 +415,7 @@ p {
 /* Footer Styling */
 
 .site-footer {
-  @apply bg-cea-light-grey text-black grid grid-cols-12 gap-6 lg:gap-12 h-fit mt-16 lg:mt-32;
+  @apply bg-cea-light-grey text-black grid grid-cols-12 gap-6 lg:gap-12 h-fit mt-12 lg:mt-24;
 }
 
 .footer-cea {
@@ -588,7 +621,7 @@ p {
 }
 
 .news-thumbnail {
-  @apply col-span-5 overflow-hidden relative aspect-square;
+  @apply col-span-5 overflow-hidden relative aspect-square border border-cea-orange p-2;
 }
 
 .news-thumbnail a {
@@ -662,7 +695,7 @@ p {
 }
 
 .news-prevthumbnail {
-  @apply h-full overflow-hidden w-full h-full relative;
+  @apply h-full overflow-hidden w-full h-full relative border border-cea-orange p-2;
 }
 
 .news-prevthumbnail a {
@@ -702,7 +735,7 @@ p {
 }
 
 .project-thumbnail {
-  @apply w-full h-[20vh] overflow-hidden relative;
+  @apply w-full h-[20vh] overflow-hidden relative border border-cea-orange p-2;
 }
 
 .project-thumbnail a {
@@ -854,3 +887,22 @@ p {
 .membre-content.truncated+.membre-expand {
   display: inline;
 }
+
+/* Single Page Styling */
+
+.single-grid {
+  @apply grid grid-cols-12 min-h-[70vh] items-center;
+}
+
+.single-thumbnail {
+  @apply col-start-2 col-span-3 overflow-hidden h-full border border-cea-orange p-2;
+}
+
+.single-title {
+  @apply my-10;
+}
+
+.single-content {
+  @apply flex flex-col h-full justify-between gap-12 col-start-6 col-span-6;
+}
+

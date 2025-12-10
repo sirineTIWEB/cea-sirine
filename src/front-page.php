@@ -17,8 +17,8 @@ get_header(); ?>
                     <h3>Le <span>CEA</span> Ferrer est l’organisme officiel composé des étudiants élus par la HEFF pour
                         représenter et défendre les intérêts de tous au sein de la Haute École.</h3>
                 </div>
-                <a href="<?php echo home_url('/informations/'); ?>" class="header-btn btn-primary">En savoir plus sur le
-                    <span>CEA</span></a>
+                <a data-text="En savoir plus sur le CEA →" href="<?php echo home_url('/informations/'); ?>" class="header-btn btn-primary">En savoir plus sur le
+                    <span>CEA</span>→</a>
             </div>
             <?php if (has_post_thumbnail()): ?>
                 <div class="w-screen h-[30vh] lg:h-[40vh] bg-cover overflow-hidden">
@@ -46,7 +46,7 @@ get_header(); ?>
                 <h3>Le <span>CEA</span> Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                     vulputate libero et velit interdum, ac aliquet odio mattis.</h3>
             </div>
-            <a class="header-btn btn-primary" href="<?php echo home_url('/activites/'); ?>">Toutes les activités</a>
+            <a data-text="Toutes les activités →" class="header-btn btn-primary" href="<?php echo home_url('/activites/'); ?>">Toutes les activités</a>
         </div>
 
         <?php
@@ -130,8 +130,8 @@ get_header(); ?>
                     <h3>Le <span>CEA</span> Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                         vulputate libero et velit interdum, ac aliquet odio mattis.</h3>
                 </div>
-                <a class="header-btn btn-primary" href="<?php echo home_url('/actualites/'); ?>">Toutes les
-                    actualités</a>
+                <a data-text="Toutes les actualités →" class="header-btn btn-primary" href="<?php echo home_url('/actualites/'); ?>">Toutes les
+                    actualités →</a>
             </div>
 
             <?php
@@ -172,15 +172,15 @@ get_header(); ?>
                         <?php if (has_post_thumbnail()): ?>
                             <div class="news-thumbnail">
                                 <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover']); ?>
+                                    <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300']); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
 
                         <div class="news-content">
                             <div class="news-meta">
-                                <a class="btn-secondary" href="<?php the_permalink(); ?>">
-                                    Lire la suite
+                                <a data-texte="Lire la suite →" class="btn-secondary" href="<?php the_permalink(); ?>">
+                                    Lire la suite →
                                 </a>
                                 <p>
                                     <?php echo get_the_date(); ?>
@@ -220,7 +220,7 @@ get_header(); ?>
                             <?php if (has_post_thumbnail()): ?>
                                 <div class="news-prevthumbnail">
                                     <a href="<?php the_permalink(); ?>">
-                                        <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover']); ?>
+                                        <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover hover:scale-110 transition-transform duration-300']); ?>
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -245,7 +245,7 @@ get_header(); ?>
                     <h3>Le <span>CEA</span> Vorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
                         vulputate libero et velit interdum, ac aliquet odio mattis.</h3>
                 </div>
-                <a class="header-btn btn-primary" href="<?php echo home_url('/projets/'); ?>">Tous les projets</a>
+                <a data-text="Tous les projets →" class="header-btn btn-primary" href="<?php echo home_url('/projets/'); ?>">Tous les projets →</a>
             </div>
 
             <?php
@@ -297,7 +297,7 @@ get_header(); ?>
                             <div class="project-thumbnail">
                                 <?php if (has_post_thumbnail()): ?>
                                     <a href="<?php the_permalink(); ?>">
-                                        <?php the_post_thumbnail('medium'); ?>
+                                        <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover hover:scale-110 transition-transform duration-300']); ?>
                                     </a>
                                 <?php endif; ?>
                             </div>

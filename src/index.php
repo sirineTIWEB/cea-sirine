@@ -32,7 +32,7 @@ get_header(); ?>
 
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="post-thumbnail">
-                            <?php the_post_thumbnail(); ?>
+                            <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300']); ?>
                         </div>
                     <?php endif; ?>
 

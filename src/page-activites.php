@@ -14,8 +14,9 @@ get_header();
                 <h3>Le <span>CEA</span> Ferrer est l’organisme officiel composé des étudiants élus par la HEFF pour
                     représenter et défendre les intérêts de tous au sein de la Haute École.</h3>
             </div>
-            <a class="header-btn btn-primary">
-                Voir l'agenda
+            <!-- vers div agenda -->
+            <a data-text="Voir l'agenda →" href="#agenda" class="header-btn btn-primary">
+                Voir l'agenda →
             </a>
         </div>
 
@@ -76,7 +77,7 @@ get_header();
         <?php endif; ?>
     </div>
 
-    <div>
+    <div class="agenda">
         <div class="header-section">
             <div class="header-title">
                 <h1>L'Agenda du <span>CEA</span>.</h1>

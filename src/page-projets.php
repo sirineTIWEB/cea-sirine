@@ -57,7 +57,7 @@ get_header(); ?>
                         <?php if (has_post_thumbnail()): ?>
                             <div class="news-thumbnail">
                                 <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover']); ?>
+                                    <?php the_post_thumbnail('large', ['class' => 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300']); ?>
                                 </a>
                             </div>
                         <?php endif; ?>
@@ -104,7 +104,7 @@ get_header(); ?>
                             </p>
                             <div class="news-prevthumbnail">
                                 <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover']); ?>
+                                    <?php the_post_thumbnail('medium', ['class' => 'w-full h-full object-cover hover:scale-110 transition-transform duration-300']); ?>
                                 </a>
                             </div>
                         </article>

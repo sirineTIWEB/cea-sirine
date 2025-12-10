@@ -24,7 +24,7 @@
       <!-- Desktop Header -->
       <div class="hidden md:grid grid-cols-12 items-center h-20 w-screen">
         <!-- Logo -->
-        <div class="site-branding col-start-2 col-span-2">
+        <div class="site-branding col-start-2 col-span-1">
           <?php if (has_custom_logo()): ?>
             <div class="custom-logo w-12 h-12">
               <?php the_custom_logo(); ?>
@@ -49,13 +49,13 @@
         </div>
 
         <!-- Navigation -->
-        <nav id="site-navigation" class="main-navigation col-span-6 flex justify-center">
+        <nav id="site-navigation" class="main-navigation col-start-4 col-span-6 flex justify-center">
           <?php
           wp_nav_menu(
             array(
               'theme_location' => 'primary',
               'menu_id' => 'primary-menu',
-              'menu_class' => 'flex space-x-6 items-center',
+              'menu_class' => 'flex space-x-3 items-center',
               'container' => false,
               'fallback_cb' => false,
               'walker' => new class extends Walker_Nav_Menu {
@@ -98,9 +98,9 @@
         </nav>
 
         <!-- Contact Button -->
-        <div class="col-span-2 flex justify-end">
-          <a href="#footer" class="btn-primary" onclick="event.preventDefault(); document.querySelector('.site-footer').scrollIntoView({ behavior: 'smooth' });">
-            Contactez-nous
+        <div class="col-span-2 col-start-10 col-end-12 flex justify-self-end">
+          <a href="#footer" data-text="Contactez-nous →" class="btn-primary" onclick="event.preventDefault(); document.querySelector('.site-footer').scrollIntoView({ behavior: 'smooth' });">
+            Contactez-nous →
           </a>
         </div>
       </div>

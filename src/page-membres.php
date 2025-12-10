@@ -99,7 +99,7 @@ endif;
                                         <div class="membre-photo">
                                             <?php if (has_post_thumbnail($membre->ID)): ?>
 
-                                                <?php echo get_the_post_thumbnail($membre->ID, 'medium', array('class' => 'w-full h-[40vh] object-cover')); ?>
+                                                <?php echo get_the_post_thumbnail($membre->ID, 'medium', array('class' => 'w-full h-[40vh] object-cover hover:scale-110 transition-transform duration-300')); ?>
                                             <?php endif; ?>
                                         </div>
 
