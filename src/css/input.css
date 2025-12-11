@@ -451,21 +451,38 @@ p {
 
 /* Footer Styling */
 
-
 .site-footer {
-  @apply text-black grid grid-cols-12 gap-6 lg:gap-12 h-fit mt-12 lg:mt-24;
+  @apply text-black mt-12 lg:mt-24;
 }
 
 .footer-cea {
-  @apply flex flex-col items-start gap-4 col-start-2 col-end-12 py-6 lg:flex-row lg:items-end lg:justify-evenly lg:gap-8 lg:py-12;
+  @apply grid grid-cols-12 gap-8 py-8 lg:py-16;
 }
 
-.bottom-footer {
-  @apply col-start-2 col-end-12 row-start-2 border-t border-black h-fit px-0;
+/* Left Section: Logo + Legal Links */
+.footer-left {
+  @apply col-start-2 col-end-12 flex flex-col justify-between gap-6 lg:col-start-2 lg:col-span-3;
 }
 
+.footer-logo {
+  @apply w-fit;
+}
+
+.footer-legal {
+  @apply flex flex-col gap-3;
+}
+
+/* Right Section: 3 Columns */
 .footer-right {
-  @apply flex flex-col gap-4 w-full lg:gap-8 lg:w-auto;
+  @apply col-start-2 col-end-12 grid grid-cols-1 gap-8 md:grid-cols-3 lg:col-start-6 lg:col-end-12;
+}
+
+.footer-widget h2 {
+  @apply text-lg font-semibold mb-4;
+}
+
+.footer-socials {
+  @apply flex gap-4;
 }
 
 /* Pagination */
@@ -1022,11 +1039,15 @@ p {
 /* FEF section */
 
 .fef-grid {
-  @apply grid grid-cols-12;
+  @apply flex flex-col justify-center items-center w-screen h-screen;
 }
 
-.fef-grid {
-  @apply flex flex-col justify-center items-center;
+.fef-grid h1 {
+  @apply w-2/3 text-center;
+}
+
+.fef-grid h3 {
+  @apply w-1/2 text-center;
 }
 
 /* Membres Page Styling */

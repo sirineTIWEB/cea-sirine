@@ -108,7 +108,7 @@ get_header(); ?>
     <?php if (get_field('membre_fef_cette_annee')): ?>
         <div class="fef-grid">
             <h1>La Fédération des Étudiants Francophones</h1>
-            <h3>La FEF est un Organe de Représentation Communautaire qui assiste les conseils étudiants dans leurs missions. Elle permet aussi de faire le lien entre les conseils des différentes Universités, HE et ESA pour organiser des dialogues à grande échelle et/ou exprimer leurs idées au travers de vastes manifestations. Chaque année, nous pouvons choisir ou non de nous réaffilier à cet organe.</h3>
+            <h3>La <span>FEF</span> est un Organe de Représentation Communautaire qui assiste les conseils étudiants dans leurs missions. Elle permet aussi de faire le lien entre les conseils des différentes Universités, HE et ESA pour organiser des dialogues à grande échelle et/ou exprimer leurs idées au travers de vastes manifestations. Chaque année, nous pouvons choisir ou non de nous réaffilier à cet organe.</h3>
 
         </div>
     <?php endif; ?>
