@@ -642,6 +642,8 @@ function initButtonSwipe() {
     const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-nav, .btn-nav-mobile');
 
     buttons.forEach(button => {
+        // Skip select elements
+        if (button.tagName === 'SELECT') return;
         // Get the text content (includes the arrow from CSS ::after)
         let text = button.textContent.trim();
 

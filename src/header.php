@@ -22,7 +22,7 @@
 
     <header id="masthead" class="site-header bg-white sticky top-0 z-50">
       <!-- Desktop Header -->
-      <div class="hidden md:grid grid-cols-12 items-center h-20 w-screen">
+      <div class="hidden lg:grid grid-cols-12 items-center h-20 w-screen">
         <!-- Logo -->
         <div class="site-branding col-start-2 col-span-1">
           <?php if (has_custom_logo()): ?>
@@ -106,7 +106,7 @@
       </div>
 
       <!-- Mobile Header -->
-      <div class="md:hidden grid grid-cols-12 w-screen">
+      <div class="lg:hidden grid grid-cols-12 w-screen">
         <div class="col-start-2 col-end-12 flex items-center justify-between h-16">
           <!-- Site Branding -->
           <div class="site-branding flex items-center space-x-3">
@@ -146,7 +146,7 @@
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <nav class="mobile-navigation md:hidden hidden col-start-2 col-end-12">
+        <nav class="mobile-navigation lg:hidden hidden col-start-2 col-end-12">
           <div class="py-2 lg:py-4">
             <?php
             wp_nav_menu(
