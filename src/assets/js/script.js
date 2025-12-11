@@ -436,7 +436,7 @@ function initProjetsCarousel() {
     const projDates = document.querySelectorAll('.proj-date');
 
     // Set initial active state
-    function setActiveCard(index) {
+    function setActiveCard(index, direction = 'next') {
         // Remove active class from all cards
         projCards.forEach(card => card.classList.remove('active'));
 
@@ -448,12 +448,12 @@ function initProjetsCarousel() {
         // Update all cards with their data
         projCards.forEach((card, cardIndex) => {
             const dataIndex = (index + cardIndex) % projetsData.length;
-            updateCard(card, projetsData[dataIndex], projDates[cardIndex]);
+            updateCard(card, projetsData[dataIndex], projDates[cardIndex], direction);
         });
     }
 
     // Update individual card content
-    function updateCard(card, projet, dateElement) {
+    function updateCard(card, projet, dateElement, direction = 'next') {
         // Update thumbnail with slide animation
         const thumbnail = card.querySelector('.proj-thumbnail a');
         if (thumbnail && projet.thumbnail) {
@@ -464,14 +464,23 @@ function initProjetsCarousel() {
                 const newImg = document.createElement('img');
                 newImg.src = projet.thumbnail;
                 newImg.alt = projet.title;
-                newImg.className = 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300 slide-in-right';
 
-                oldImg.classList.add('slide-out-left');
+                // Choose animation based on direction
+                if (direction === 'next') {
+                    // Right arrow: slide from right to left
+                    newImg.className = 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300 slide-in-right';
+                    oldImg.classList.add('slide-out-left');
+                } else {
+                    // Left arrow: slide from left to right
+                    newImg.className = 'h-full w-auto object-cover hover:scale-110 transition-transform duration-300 slide-in-left';
+                    oldImg.classList.add('slide-out-right');
+                }
+
                 thumbnail.appendChild(newImg);
 
                 setTimeout(() => {
                     oldImg.remove();
-                    newImg.classList.remove('slide-in-right');
+                    newImg.classList.remove('slide-in-right', 'slide-in-left');
                 }, 600);
             }
         }
@@ -502,14 +511,14 @@ function initProjetsCarousel() {
     function nextProject(e) {
         e.preventDefault();
         currentActiveIndex = (currentActiveIndex + 1) % projetsData.length;
-        setActiveCard(currentActiveIndex);
+        setActiveCard(currentActiveIndex, 'next');
     }
 
     // Navigate to previous project
     function prevProject(e) {
         e.preventDefault();
         currentActiveIndex = (currentActiveIndex - 1 + projetsData.length) % projetsData.length;
-        setActiveCard(currentActiveIndex);
+        setActiveCard(currentActiveIndex, 'prev');
     }
 
     // Attach event listeners

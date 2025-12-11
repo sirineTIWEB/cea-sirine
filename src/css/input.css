@@ -784,22 +784,75 @@ p {
   @apply grid grid-cols-12 gap-x-4 grid-rows-2;
 }
 
+/* Mobile: Classical grid layout */
+@media (max-width: 768px) {
+  .proj-grid {
+    @apply grid-cols-1 gap-y-6 auto-rows-auto;
+  }
+}
+
 .proj-card {
   @apply col-span-3 grid grid-cols-2 auto-rows-auto gap-y-2;
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none; /* Hide by default on desktop */
+}
+
+/* Desktop: Show first 3 cards */
+.proj-card:nth-child(-n+3) {
+  display: grid;
+}
+
+/* Mobile: Show all cards */
+@media (max-width: 768px) {
+  .proj-card {
+    @apply col-span-1 grid-cols-1;
+    display: grid !important; /* Show all cards on mobile */
+  }
 }
 
 .proj-card.active {
-  grid-column: 7 / span 4;
+  grid-column: 7 / span 3;
   grid-row: 1 / span 1;
+  display: grid; /* Always show active card */
+}
+
+/* Mobile: Remove active state distinction */
+@media (max-width: 768px) {
+  .proj-card.active {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
+.proj-card.active .proj-content h3 {
+  @apply block opacity-100;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .proj-date {
   @apply col-start-7 row-start-2 h-fit;
 }
 
+/* Mobile: Show date normally within card */
+@media (max-width: 768px) {
+  .proj-date {
+    @apply col-start-auto row-start-auto;
+  }
+}
+
 .proj-arrow {
-  @apply col-start-11 row-start-2 col-end-12 flex justify-end gap-2 h-fit;
+  @apply col-start-10 row-start-2 col-end-12 flex justify-end gap-2 h-fit;
+}
+
+/* Mobile: Hide arrows */
+@media (max-width: 768px) {
+  .proj-arrow {
+    @apply hidden;
+  }
 }
 
 .proj-arrow button {
@@ -811,12 +864,24 @@ p {
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Mobile: Full width thumbnail */
+@media (max-width: 768px) {
+  .proj-thumbnail {
+    @apply col-span-1;
+  }
+}
+
 .proj-thumbnail a {
   @apply block h-full relative;
 }
 
 .proj-thumbnail img {
   @apply absolute top-0 left-0 w-full h-full object-cover;
+  transition: transform 0.3s ease;
+}
+
+.proj-thumbnail:hover img {
+  transform: scale(1.1);
 }
 
 .proj-thumbnail img.slide-out-left {
@@ -826,6 +891,16 @@ p {
 
 .proj-thumbnail img.slide-in-right {
   animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+.proj-thumbnail img.slide-out-right {
+  animation: slideOutRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 1;
+}
+
+.proj-thumbnail img.slide-in-left {
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   z-index: 2;
 }
 
@@ -871,24 +946,37 @@ p {
 
 .proj-content {
   @apply col-span-2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Mobile: Full width content */
+@media (max-width: 768px) {
+  .proj-content {
+    @apply col-span-1;
+  }
 }
 
 .proj-content h2 {
   transition: all 0.4s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .proj-content h3 {
   @apply hidden opacity-0;
   transition: opacity 0.4s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-.proj-card.active .proj-content h3 {
-  @apply block opacity-100;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Mobile: Show all content */
+@media (max-width: 768px) {
+  .proj-content h3 {
+    @apply block opacity-100;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
+  }
 }
 
 .proj-date {
