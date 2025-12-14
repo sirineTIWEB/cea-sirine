@@ -51,6 +51,13 @@ function theme_cea_sirine_scripts() {
     // Main stylesheet
     wp_enqueue_style('theme-cea-sirine-style', get_stylesheet_uri());
 
+    // GSAP Library
+    wp_enqueue_script('gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js', array(), '3.12.5', true);
+    wp_enqueue_script('gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js', array('gsap'), '3.12.5', true);
+
+    // GSAP Animations
+    wp_enqueue_script('theme-cea-gsap-animations', get_template_directory_uri() . '/assets/js/gsap-animations.js', array('gsap', 'gsap-scrolltrigger'), '1.0.0', true);
+
     // Main JavaScript
     wp_enqueue_script('theme-cea-sirine-main', get_template_directory_uri() . '/assets/js/script.js', array(), '1.0.0', true);
 
